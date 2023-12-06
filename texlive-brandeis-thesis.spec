@@ -1,6 +1,6 @@
 Name:		texlive-brandeis-thesis
-Version:	59832
-Release:	2
+Version:	68092
+Release:	1
 Summary:	A class for Brandeis University M.A. theses
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/macros/latex/contrib/brandeis-thesis
