@@ -1,40 +1,25 @@
-Name:		texlive-brandeis-thesis
-Version:	68092
-Release:	1
+%global tl_name brandeis-thesis
+%global tl_revision 68092
+
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	3.3
+Release:	%{tl_revision}.1
 Summary:	A class for Brandeis University M.A. theses
 Group:		Publishing
 URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/brandeis-thesis
 License:	lppl1.3c
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/brandeis-thesis.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/brandeis-thesis.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/brandeis-thesis.source.r%{version}.tar.xz
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/brandeis-thesis.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/brandeis-thesis.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/brandeis-thesis.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
+BuildSystem:	texlive
 BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+%texlive_base_requires
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-brandeis-thesis.cls provides the structures and formatting
-information for an M.A. thesis for the Brandeis University
-Graduate School of Arts and Sciences.
+brandeis-thesis.cls provides the structures and formatting information
+for an M.A. thesis for the Brandeis University Graduate School of Arts
+and Sciences.
 
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-rm -rf tlpkg
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -a * %{buildroot}%{_texmfdistdir}
-
-%files
-%doc %{_texmfdistdir}/source/latex/brandeis-thesis
-%{_texmfdistdir}/tex/latex/brandeis-thesis
-%doc %{_texmfdistdir}/doc/latex/brandeis-thesis
-
-%post -p %{_sbindir}/texlive.post
-
-%postun
-[ "$1" -eq 0 ] && %{_sbindir}/texlive.post
